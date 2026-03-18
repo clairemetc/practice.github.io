@@ -1,452 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Project</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-2: #22c55e;
-      --border: rgba(255,255,255,0.08);
-      --shadow: 0 20px 40px rgba(0,0,0,0.28);
-      --max: 1100px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAVE Round Robins</title>
 
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #020617 0%, #0f172a 55%, #111827 100%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(100% - 2rem, var(--max));
-      margin: 0 auto;
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(10px);
-      background: rgba(2, 6, 23, 0.7);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-    }
-
-    .brand {
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .hero {
-      padding: 5.5rem 0 4rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 0.82rem;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 4.8rem);
-      line-height: 1.05;
-      margin: 0 0 1rem;
-    }
-
-    .lead {
-      color: var(--muted);
-      font-size: 1.08rem;
-      max-width: 60ch;
-      margin-bottom: 1.5rem;
-    }
-
-    .cta-row {
-      display: flex;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.9rem 1.2rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-weight: 700;
-      transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.96;
-      border-color: rgba(255,255,255,0.18);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #60a5fa);
-      color: #03111f;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-    }
-
-    .hero-card, .card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      padding: 1.4rem;
-    }
-
-    .mock-window {
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #0b1220;
-    }
-
-    .mock-top {
-      display: flex;
-      gap: 0.45rem;
-      padding: 0.8rem 1rem;
-      background: rgba(255,255,255,0.04);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .dot {
-      width: 0.7rem;
-      height: 0.7rem;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.24);
-    }
-
-    .mock-body {
-      padding: 1.3rem;
-      display: grid;
-      gap: 0.8rem;
-    }
-
-    .mock-line, .mock-box {
-      background: rgba(255,255,255,0.08);
-      border-radius: 12px;
-    }
-
-    .mock-line { height: 14px; }
-    .mock-box { height: 140px; }
-
-    section {
-      padding: 1.5rem 0 4rem;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      margin: 0 0 0.5rem;
-    }
-
-    .section-text {
-      color: var(--muted);
-      max-width: 65ch;
-      margin-bottom: 1.5rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-
-    .card {
-      padding: 1.25rem;
-    }
-
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    .card p, .card li {
-      color: var(--muted);
-    }
-
-    ul {
-      margin: 0.7rem 0 0;
-      padding-left: 1.2rem;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1rem;
-    }
-
-    .tag {
-      padding: 0.45rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.22);
-      color: #bae6fd;
-      font-size: 0.92rem;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .timeline .card strong {
-      color: var(--text);
-    }
-
-    .footer {
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      padding: 2rem 0 3rem;
-      text-align: center;
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid,
-      .grid-3,
-      .grid-2 {
-        grid-template-columns: 1fr;
+    <style>
+      :root {
+        --bg: #0f172a;
+        --bg-top: #020617;
+        --panel: #111827;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --accent: #38bdf8;
+        --border: rgba(255, 255, 255, 0.08);
       }
 
-      .hero {
-        padding-top: 4rem;
+      * {
+        box-sizing: border-box;
       }
-    }
-  </style>
-</head>
-<body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#top" class="brand">My Project</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#features">Features</a>
-        <a href="#demo">Demo</a>
-        <a href="#tech">Tech Stack</a>
-        <a href="#timeline">Process</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </nav>
 
-  <header class="hero" id="top">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">GitHub Pages Project Site</div>
-        <h1>Replace this with your project name</h1>
-        <p class="lead">
-          Replace this paragraph with a 2–3 sentence summary of what your project does,
-          who it is for, and why it matters. Keep it concrete and easy to skim.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#demo">View Demo</a>
-          <a class="btn btn-secondary" href="https://github.com/your-username/your-repo">GitHub Repo</a>
-        </div>
-        <div class="tag-row">
-          <span class="tag">Tag 1</span>
-          <span class="tag">Tag 2</span>
-          <span class="tag">Tag 3</span>
-        </div>
-      </div>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, Arial, sans-serif;
+        background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg) 55%, var(--panel) 100%);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-      <div class="hero-card">
-        <div class="mock-window">
-          <div class="mock-top">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-          <div class="mock-body">
-            <div class="mock-line" style="width: 58%"></div>
-            <div class="mock-line" style="width: 80%"></div>
-            <div class="mock-box"></div>
-            <div class="mock-line" style="width: 70%"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+      .container {
+        text-align: center;
+        padding: 2rem;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.04);
+      }
 
-  <main>
-    <section id="about">
-      <div class="container">
-        <h2 class="section-title">About the Project</h2>
-        <p class="section-text">
-          Use this section to explain the problem, your motivation, and the core idea.
-          This is a good place to say what inspired the project and what makes your approach interesting.
-        </p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>The Problem</h3>
-            <p>Describe the pain point or need your project addresses.</p>
-          </div>
-          <div class="card">
-            <h3>The Solution</h3>
-            <p>Describe how your project solves that problem in a practical way.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+      h1 {
+        margin: 0 0 0.75rem 0;
+        font-size: 3rem;
+        color: var(--text);
+      }
 
-    <section id="features">
-      <div class="container">
-        <h2 class="section-title">Key Features</h2>
-        <p class="section-text">Highlight the 3 most important things your project can do.</p>
-        <div class="grid-3">
-          <div class="card">
-            <h3>Feature One</h3>
-            <p>Explain what it does and why it is useful.</p>
-          </div>
-          <div class="card">
-            <h3>Feature Two</h3>
-            <p>Explain what it does and why it is useful.</p>
-          </div>
-          <div class="card">
-            <h3>Feature Three</h3>
-            <p>Explain what it does and why it is useful.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+      p {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--muted);
+      }
 
-    <section id="demo">
-      <div class="container">
-        <h2 class="section-title">Demo</h2>
-        <p class="section-text">
-          Add screenshots, a GIF, a short embedded video, or a walkthrough of how someone would use the project.
-        </p>
-        <div class="card">
-          <h3>Suggested demo structure</h3>
-          <ul>
-            <li>Step 1: What the user sees first</li>
-            <li>Step 2: What action they take</li>
-            <li>Step 3: What result your system produces</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="tech">
-      <div class="container">
-        <h2 class="section-title">Tech Stack</h2>
-        <p class="section-text">List the tools, frameworks, hardware, or APIs used in the project.</p>
-        <div class="grid-3">
-          <div class="card">
-            <h3>Frontend</h3>
-            <p>HTML, CSS, JavaScript, React, or whatever you used.</p>
-          </div>
-          <div class="card">
-            <h3>Backend / Logic</h3>
-            <p>Python, Flask, FastAPI, Node, C++, embedded firmware, etc.</p>
-          </div>
-          <div class="card">
-            <h3>Tools / Hardware</h3>
-            <p>GitHub, Docker, AWS, ESP32, sensors, datasets, APIs, and more.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="timeline">
-      <div class="container">
-        <h2 class="section-title">Build Process</h2>
-        <p class="section-text">This section is great for class projects, portfolios, and hackathon submissions.</p>
-        <div class="timeline">
-          <div class="card">
-            <strong>Phase 1:</strong> Initial idea, research, and planning.
-          </div>
-          <div class="card">
-            <strong>Phase 2:</strong> Core implementation and main technical challenges.
-          </div>
-          <div class="card">
-            <strong>Phase 3:</strong> Testing, polishing, and future improvements.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <h2 class="section-title">Links</h2>
-        <p class="section-text">Replace these with your actual links.</p>
-        <div class="grid-2">
-          <a class="card" href="https://github.com/your-username">
-            <h3>GitHub</h3>
-            <p>github.com/your-username</p>
-          </a>
-          <a class="card" href="mailto:your-email@example.com">
-            <h3>Email</h3>
-            <p>your-email@example.com</p>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
+      .accent {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
     <div class="container">
-      Built with GitHub Pages • Replace this footer text with your name and year
+      <h1>RAVE <span class="accent">Round Robins</span></h1>
+      <p>Testing GitHub Pages</p>
     </div>
-  </footer>
-</body>
+  </body>
 </html>
